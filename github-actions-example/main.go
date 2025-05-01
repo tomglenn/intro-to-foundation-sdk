@@ -32,13 +32,13 @@ func main() {
 
 	builder := dashboard.NewDashboardBuilder("My Dashboard").
 		Uid("my-dashboard").
-		Tags([]string{"generated", "foundation-sdk", "go", "github-actions"}).
+		Tags([]string{"generated", "foundation-sdk", "go", "github-actions", "Test"}).
 		Refresh("5m").
 		Time("now-1h", "now").
 		Timezone(common.TimeZoneBrowser).
 		WithPanel(
 			stat.NewPanelBuilder().
-				Title("Version").
+				Title("Version (Edited)").
 				Datasource(testdataRef).
 				ReduceOptions(common.NewReduceDataOptionsBuilder().
 					Calcs([]string{"lastNotNull"}).
