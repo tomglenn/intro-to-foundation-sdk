@@ -25,6 +25,10 @@ It also includes a dummy web application that:
 
 This example demonstrates how to integrate multiple tools in the Grafana ecosystem and automate dashboard creation.
 
+### 3. GitHub Actions Example: Automating Dashboard Deployment with GitHub Actions
+
+This example demonstrates how to use GitHub Actions to automate the process of generating and deploying Grafana dashboards. It is ideal for teams looking to integrate dashboard management into their CI/CD pipelines.
+
 ## Getting Started
 To explore the examples, clone this repository and follow the instructions provided in each example's directory.
 
@@ -44,6 +48,7 @@ This command will download and install the necessary Go modules for the project.
 ## Instructions for Running the Examples
 
 ### 1. Basic Example
+
 To generate a Grafana dashboard JSON file, follow these steps:
 1. Navigate to the `basic-example` directory:
     ```bash
@@ -67,6 +72,7 @@ To generate a Grafana dashboard JSON file, follow these steps:
 This process allows you to visualize the generated dashboard in a local Grafana instance.
 
 ### 2. Generate and Deploy Example
+
 To spin up the entire stack, follow these steps:
 1. Navigate to the `generate-and-deploy-example` directory:
     ```bash
@@ -90,7 +96,35 @@ The k6 script will automatically generate web traffic, and the web service dashb
 
 ### 3. GitHub Actions Example
 
-TODO
+Before running this example, ensure the following are configured in your GitHub repository:
+1. **GitHub Secret**:
+    - `GRAFANA_TOKEN`: A Grafana Service Account token with the necessary permissions to manage dashboards.
+2. **GitHub Variables**:
+    - `GRAFANA_SERVER`: The URL of your Grafana server (e.g., `http://yourinstance.grafana.net`).
+    - `GRAFANA_STACK_ID`: The stack ID of your Grafana instance *if you are using Grafana Cloud*.
+    - `GRAFANA_ORG_ID`: The organisation ID in your Grafana instance *if you are using Grafana OSS/Enterprise*.
+
+**Note**
+This example assumes your Grafana instance is running on Grafana Cloud, if this is not the case you can replace `GRAFANA_STACK_ID` with `GRAFANA_ORG_ID` both in your GitHub variables as well as in the [deploy-dashboard.yml](./.github/workflows/deploy-dashboard.yml) file.
+
+1. Navigate to the `github-actions-example` directory:
+     ```bash
+     cd github-actions-example
+     ```
+2. Review the provided GitHub Actions workflow file located at `.github/workflows/deploy-dashboard.yml`. This file defines the steps to:
+    - Generate the dashboard JSON using the Grafana Foundation SDK.
+    - Deploy the generated dashboard to the specified Grafana server.
+
+3. Push the workflow file and any changes to your repository:
+     ```bash
+     git add .
+     git commit -m "Add GitHub Actions example"
+     git push origin main
+     ```
+
+4. Trigger the GitHub Actions workflow by pushing changes or manually running the workflow in the Actions tab of your repository.
+
+Once the workflow completes, the dashboard will be deployed to your Grafana server.
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to improve the examples or add new ones.
